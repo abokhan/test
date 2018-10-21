@@ -6,7 +6,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("abokhan/test", "-f docker/Dockerfile .")
+        app = docker.build("abokhan/test", "-f docker/Dockerfile docker")
     }
 
     stage('Test image') {
