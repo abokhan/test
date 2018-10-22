@@ -8,16 +8,18 @@ node('jenkins-dockerInDocker') {
         checkout scm
     }
 
-    stage('Build image') {
-        sh "id"
-        sh "whoami"
-        sh "ls -al /usr/local/bin/docker"
-        sh "/usr/local/bin/docker"
-        sh "docker"
+    container('dockerindocker') {
+        stage('Build image') {
+            sh "id"
+            sh "whoami"
+            sh "ls -al /usr/local/bin/docker"
+            sh "/usr/local/bin/docker"
+            sh "docker"
 
-        app = docker.build("abokhan/test", "-f docker/Dockerfile")
+            app = docker.build("abokhan/test", "-f docker/Dockerfile")
+        }
     }
-
+    
     stage('Test image') {
         app.inside {
             sh 'echo "Tests passed"'
