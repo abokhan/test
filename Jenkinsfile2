@@ -11,8 +11,7 @@ node('jenkins-dockerInDocker') {
     stage('Build image') {
         sh "id"
         sh "whoami"
-        sh "which docker"
-        sh "find /home/jenkins/workspace -name script.sh -exec cat {} ;"
+        sh "/usr/local/bin/docker"
         sh "docker"
 
         app = docker.build("abokhan/test", "-f docker/Dockerfile")
