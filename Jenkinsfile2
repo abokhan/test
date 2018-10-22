@@ -10,6 +10,7 @@ node('jenkins-dockerInDocker') {
 
     stage('Build image') {
         container('dockerindocker') {
+            sh "docker -v"
             app = docker.build("abokhan/test", "-f docker/Dockerfile docker")
         }
     }
