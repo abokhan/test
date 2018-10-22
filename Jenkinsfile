@@ -1,4 +1,4 @@
-node('jenkins-jx-base') {
+node('jenkins-dockerInDocker') {
     def app
 
     stage('Clone repository') {
