@@ -8,7 +8,6 @@ node('jenkins-dockerInDocker') {
     }
 
     stage('Build image') {
-#        sh "sleep 3600"
         app = docker.build("abokhan/test", "-f docker/Dockerfile docker")
     }
 
