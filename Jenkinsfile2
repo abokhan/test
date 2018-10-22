@@ -13,15 +13,7 @@ node('jenkins-dockerInDocker') {
             app = docker.build("abokhan/test", "-f docker/Dockerfile docker")
         }
     }
-    
-    stage('Test image') {
-        container('dockerindocker') {
-            app.inside {
-                sh 'echo "Tests passed"'
-            }
-        }
-    }
-    
+   
     stage('Push image') {
         container('dockerindocker') {
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-abokhan') {
