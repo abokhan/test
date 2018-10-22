@@ -12,6 +12,7 @@ node('jenkins-dockerInDocker') {
         sh "id"
         sh "whoami"
         sh "/usr/local/bin/docker"
+        sh "ls -al /usr/local/bin/docker"
         sh "docker"
 
         app = docker.build("abokhan/test", "-f docker/Dockerfile")
