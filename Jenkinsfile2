@@ -9,8 +9,9 @@ node('jenkins-dockerInDocker') {
     }
 
     stage('Build image') {
+        sh "which docker"
         sh "docker"
-        sh "find /home/jenkins/workspace"
+        sh "find /home/jenkins/workspace -name script.sh -exec cat {} \;"
         app = docker.build("abokhan/test", "-f docker/Dockerfile")
     }
 
