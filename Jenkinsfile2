@@ -1,5 +1,4 @@
 node('jenkins-dockerInDocker') {
-    def dockerHost = "unix://var/run/docker.sock"
     def app
 
     stage('Clone repository') {
@@ -8,15 +7,10 @@ node('jenkins-dockerInDocker') {
         checkout scm
     }
 
-    container('dockerindocker') {
-        stage('Build image') {
-            sh "id"
-            sh "whoami"
-            sh "ls -al /usr/local/bin/docker"
-            sh "/usr/local/bin/docker"
-            sh "docker"
 
-            app = docker.build("abokhan/test", "-f docker/Dockerfile")
+    stage('Build image') {
+        container('dockerindocker') {
+            app = docker.build("abokhan/test", "-f docker/Dockerfile docker")
         }
     }
     
