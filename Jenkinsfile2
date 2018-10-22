@@ -10,6 +10,7 @@ node('jenkins-dockerInDocker') {
     stage('Build image') {
         container('dockerindocker') {
             sh "docker -v"
+            sh "docker images --no-trunc"
             app = docker.build("abokhan/test", "-f docker/Dockerfile docker")
         }
     }
@@ -17,7 +18,7 @@ node('jenkins-dockerInDocker') {
     stage('Push image') {
         container('dockerindocker') {
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-abokhan') {
-                sh "docker images --no-trunc"
+
                 app.push("${env.BUILD_NUMBER}")
                 app.push("latest")
             }
